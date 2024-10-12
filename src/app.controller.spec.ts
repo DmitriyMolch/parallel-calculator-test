@@ -34,6 +34,12 @@ describe('AppController', () => {
       const expected = { result: 11 };
       expect(appController.evaluate({ expression })).toStrictEqual(expected);
     });
+
+    it('valid expression negative numbers"', () => {
+      const expression = '(-1-1)*2+3*(1-3+4)+(-10)/2';
+      const expected = { result: -3 };
+      expect(appController.evaluate({ expression })).toStrictEqual(expected);
+    });
   });
 
   describe('Fails on', () => {

@@ -17,7 +17,7 @@ describe('AppController (e2e)', () => {
 
   describe('Evaluates correctly', () => {
     it('valid expression', () => {
-      const expression = '(1-1)*2+3*(1-3+4)+10/2';
+      const expression = '(1-1)2+3*(1-3+4)+10/2';
       const expected = { result: 11 };
 
       return request(app.getHttpServer())
@@ -41,6 +41,17 @@ describe('AppController (e2e)', () => {
     it('valid expression with float numbers', () => {
       const expression = '(1.11-1.11)*2.1+3.12*(1.1-2.8+4.1)+10.2/2.2-0.1';
       const expected = { result: 12.024363636363637 };
+
+      return request(app.getHttpServer())
+        .post('/evaluate')
+        .send({ expression })
+        .expect(200)
+        .expect(expected);
+    });
+
+    it('valid expression with negative numbers', () => {
+      const expression = '(-1-1)*2+3*(1-3+4)+(-10)/2';
+      const expected = { result: -3 };
 
       return request(app.getHttpServer())
         .post('/evaluate')

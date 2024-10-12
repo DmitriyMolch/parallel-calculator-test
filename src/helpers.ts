@@ -1,4 +1,4 @@
-const regexp = /[\d\s]/; //digit or white space
+const regexp = /[\d\s+-]/;
 
 // This logic can be extended in multiple ways
 export function checkParenthesis(expression: string): boolean {
