@@ -12,6 +12,6 @@ export class HasBalancedParenthesis implements ValidatorConstraintInterface {
   }
 
   defaultMessage(): string {
-    return 'string expression should contain balanced parenthesis "()"';
+    return 'parenthesis syntax is incorrect';
   }
 }

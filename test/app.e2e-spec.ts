@@ -139,9 +139,35 @@ describe('AppController (e2e)', () => {
         .send({ expression })
         .expect(400)
         .expect({
-          message: [
-            'string expression should contain balanced parenthesis "()"',
-          ],
+          message: ['parenthesis syntax is incorrect'],
+          error: 'Bad Request',
+          statusCode: 400,
+        });
+    });
+
+    it('expression with operator after open parenthesis', () => {
+      const expression = '(*1-1)*2+3*(1-3+4)+10/2';
+
+      return request(app.getHttpServer())
+        .post('/evaluate')
+        .send({ expression })
+        .expect(400)
+        .expect({
+          message: ['parenthesis syntax is incorrect'],
+          error: 'Bad Request',
+          statusCode: 400,
+        });
+    });
+
+    it('expression with operator before close parenthesis', () => {
+      const expression = '(*1-1)*2+3*(1-3+4)+10/2';
+
+      return request(app.getHttpServer())
+        .post('/evaluate')
+        .send({ expression })
+        .expect(400)
+        .expect({
+          message: ['parenthesis syntax is incorrect'],
           error: 'Bad Request',
           statusCode: 400,
         });
